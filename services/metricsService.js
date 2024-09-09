@@ -20,8 +20,16 @@ const totalEthDeposited = new client.Gauge({
   help: "Total amount of ETH deposited",
 });
 
+// Valid metric name
+const regNoGauge = new client.Gauge({
+  name: "done_by_shivam_dave_", // Valid name
+  help: "21BCB0107",
+});
+
+// Register the metrics
 register.registerMetric(totalDeposits);
 register.registerMetric(totalEthDeposited);
+register.registerMetric(regNoGauge);
 
 function incrementDeposits() {
   totalDeposits.inc();
