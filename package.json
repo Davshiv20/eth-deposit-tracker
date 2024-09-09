@@ -1,0 +1,17 @@
+{
+  "name": "eth-deposit-tracker",
+  "version": "1.0.0",
+  "description": "Ethereum Deposit Tracker for Beacon Chain on Holesky",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.12",
+    "prom-client": "^14.0.1",
+    "web3": "^1.6.0",
+    "winston": "^3.3.3"
+  }
+}
