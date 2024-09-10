@@ -8,14 +8,14 @@ This application tracks ETH deposits on the Beacon Deposit Contract for the Hole
 2. Install dependencies: `npm install`
 3. Set up environment variables in a `.env` file:
    ```
-   INFURA_URL=https://holesky.infura.io/v3/YOUR_PROJECT_ID
-   MONGODB_URI=mongodb://localhost:27017/eth_deposit_tracker
-   METRICS_PORT=9101
-   TELEGRAM_BOT_TOKEN=your_bot_token
-   TELEGRAM_CHAT_ID=your_chat_id
+      INFURA_URL=https://holesky.infura.io/v3/YOUR_PROJECT_ID
+      MONGODB_URI=mongodb://localhost:27017/eth_deposit_tracker
+      METRICS_PORT=9101
+      TELEGRAM_BOT_TOKEN=your_bot_token
+      TELEGRAM_CHAT_ID=your_chat_id
    ```
 4. Ensure MongoDB is running
-5. Start the application: `npm start`
+5. Start the application: `node index.js`
 
 ## Usage
 
