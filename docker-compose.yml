@@ -1,6 +1,26 @@
 version: '3.8'
 
 services:
+  eth_deposit_tracker:
+    build: .
+    ports:
+      - "9101:9101"
+    environment:
+      INFURA_URL: ${INFURA_URL}
+      MONGODB_URI: ${MONGODB_URI}
+      METRICS_PORT: 9101   
+      TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
   prometheus:
     image: prom/prometheus:v2.37.0
     volumes:
@@ -17,7 +37,7 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
 
   node_exporter:
     image: prom/node-exporter:latest
@@ -27,4 +47,5 @@ services:
       - 9100
 
 volumes:
+  mongo-data:
   grafana-storage:
