@@ -4,7 +4,7 @@ global:
 scrape_configs:
   - job_name: 'eth_deposit_tracker'
     static_configs:
-      - targets: ['host.docker.internal:9101']  # Your app metrics
+      - targets: ['host.docker.internal:9101'] 
 
   - job_name: 'node'
     static_configs:
