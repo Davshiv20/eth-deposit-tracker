@@ -4,7 +4,7 @@ module.exports = {
     BLOCKS_TO_FETCH: 1000,
     NETWORK: 'mainnet', // Change this to 'mainnet'
     MONGODB_URI: process.env.MONGODB_URI ,
-    METRICS_PORT: process.env.METRICS_PORT ,
+    METRICS_PORT: process.env.METRICS_PORT || 9101,
     TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID
 };
