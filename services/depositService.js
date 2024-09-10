@@ -18,24 +18,24 @@ const DEPOSIT_EVENT_ABI = {
 };
 
 function decodeDepositEvent(log) {
-    try {
-        const decodedLog = web3Service.web3.eth.abi.decodeLog(
-            DEPOSIT_EVENT_ABI.inputs,
-            log.data,
-            log.topics.slice(1)
-        );
-        return {
-            pubkey: decodedLog.pubkey,
-            withdrawalCredentials: decodedLog.withdrawal_credentials,
-            amount: decodedLog.amount,
-            signature: decodedLog.signature,
-            index: decodedLog.index
-        };
-    } catch (error) {
-        logger.error('Error decoding deposit event:', error);
-        logger.error('Problematic log:', JSON.stringify(log, null, 2));
-        throw error;
-    }
+  try {
+    const decodedLog = web3Service.web3.eth.abi.decodeLog(
+      DEPOSIT_EVENT_ABI.inputs,
+      log.data,
+      log.topics.slice(1)
+    );
+    return {
+      pubkey: decodedLog.pubkey,
+      withdrawalCredentials: decodedLog.withdrawal_credentials,
+      amount: decodedLog.amount,
+      signature: decodedLog.signature,
+      index: decodedLog.index,
+    };
+  } catch (error) {
+    logger.error("Error decoding deposit event:", error);
+    logger.error("Problematic log:", JSON.stringify(log, null, 2));
+    throw error;
+  }
 }
 async function processDeposit(log) {
   try {
@@ -104,6 +104,7 @@ async function trackDeposits() {
   // Use polling instead of subscription
   setInterval(async () => {
     const newLatestBlock = await web3Service.getLatestBlockNumber();
+    logger.info(`New latest block: ${newLatestBlock}`);
     if (newLatestBlock > latestBlock) {
       const newEvents = await web3Service.getPastLogs({
         fromBlock: (BigInt(latestBlock) + BigInt(1)).toString(),
@@ -115,6 +116,7 @@ async function trackDeposits() {
           ),
         ],
       });
+      logger.info(`New events found: ${newEvents.length}`);
       for (const event of newEvents) {
         await processDeposit(event);
       }

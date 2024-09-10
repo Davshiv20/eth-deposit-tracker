@@ -6,13 +6,10 @@ const { startMetricsServer } = require('./services/metricsService');
 const logger = require('./utils/logger');
 const config = require('./config');
 
-// Set strictQuery to false to prepare for Mongoose 7
 mongoose.set('strictQuery', false);
 
-// Global error handlers
 process.on('uncaughtException', (error) => {
     logger.error('Uncaught Exception', { error: error.message, stack: error.stack });
-    // Perform any necessary cleanup here
     process.exit(1);
 });
 

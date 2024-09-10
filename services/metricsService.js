@@ -1,20 +1,20 @@
-const client = require("prom-client");
+const client = require("prom-client"); // for metric collection
 const express = require("express");
 const config = require("../config");
 const logger = require("../utils/logger");
 
 const app = express();
 
-// Create a Registry to register the metrics
+
 const register = new client.Registry();
 
-// Create a gauge for total deposits
+
 const totalDeposits = new client.Gauge({
   name: "eth_total_deposits",
   help: "Total number of ETH deposits",
 });
 
-// Create a gauge for total ETH deposited
+
 const totalEthDeposited = new client.Gauge({
   name: "eth_total_amount_deposited",
   help: "Total amount of ETH deposited",

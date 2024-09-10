@@ -3,6 +3,8 @@ module.exports = {
     BEACON_DEPOSIT_CONTRACT: '0x00000000219ab540356cBB839Cbe05303d7705Fa', // Mainnet Beacon Deposit Contract
     BLOCKS_TO_FETCH: 1000,
     NETWORK: 'mainnet', // Change this to 'mainnet'
-    MONGODB_URI: process.env.MONGODB_URI || 'mongodb://localhost:27017/eth_deposit_tracker',
-    METRICS_PORT: process.env.METRICS_PORT || 9101
+    MONGODB_URI: process.env.MONGODB_URI ,
+    METRICS_PORT: process.env.METRICS_PORT || 9101,
+    TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN,
+    TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID
 };

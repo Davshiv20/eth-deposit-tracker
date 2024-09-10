@@ -10,7 +10,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.12",
-    "prom-client": "^14.0.1",
+    "node-telegram-bot-api": "^0.66.0",
+    "prom-client": "^14.2.0",
     "web3": "^1.6.0",
     "winston": "^3.3.3"
   }
