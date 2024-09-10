@@ -69,6 +69,7 @@ The application can be configured through environment variables in the `docker-c
 3. To view available metrics:
    - Go to the Prometheus UI
    - Click on "Graph" in the top navigation
+   - Alternative is skip the previous step and go directly to status and target, make sure the state is UP
    - Start typing in the "Expression" box to see available metrics
 
 ### Grafana Setup
@@ -164,6 +165,75 @@ Log levels:
 - Modify the deposit schema in `src/models/deposit.js`
 - Add new metrics in `src/services/metricsService.js`
 
+## Dockerization
+
+This project is fully dockerized for easy deployment and consistency across different environments. Here's an overview of the Docker setup:
+
+### Docker Compose
+
+We use Docker Compose to define and run multi-container Docker applications. The `docker-compose.yml` file in the root directory defines all the services required for this application.
+
+### Dockerfile
+
+The Dockerfile for the main application is located in the root directory. It defines how the eth_deposit_tracker image is built
+
+### Volumes
+
+Docker volumes are used for data persistence:
+
+- `mongo-data`: Stores MongoDB data.
+- `grafana-storage`: Stores Grafana configurations and dashboards.
+
+### Environment Variables
+
+Sensitive information and configuration options are managed through environment variables, defined in the `.env` file and referenced in `docker-compose.yml`.
+
+### Building and Running
+
+To build and start the application:
+
+```bash
+docker-compose up --build
+```
+
+To stop the application:
+
+```bash
+docker-compose down
+```
+
+### Accessing Container Logs
+
+To view logs for a specific service:
+
+```bash
+docker-compose logs [service_name]
+```
+
+For example, to view logs of the main application:
+
+```bash
+docker-compose logs eth_deposit_tracker
+```
+
+### Scaling
+
+To scale the main application (if needed):
+
+```bash
+docker-compose up --scale eth_deposit_tracker=3
+```
+
+This would run 3 instances of the eth_deposit_tracker service.
+
+### Updating
+
+To update the application with new changes:
+
+1. Make your code changes
+2. Rebuild the images: `docker-compose build`
+3. Restart the services: `docker-compose up -d`
+   
 ## Development
 
 For local development without Docker:
@@ -186,6 +256,14 @@ For production deployment:
 2. Update the `docker-compose.yml` file with production-ready settings
 3. Use a reverse proxy (like Nginx) for added security
 4. Set up proper monitoring and alerting
+
+### Production Considerations
+
+For production deployment:
+- Use Docker secrets for managing sensitive information.
+- Consider using Docker Swarm or Kubernetes for orchestration in a clustered environment.
+- Implement health checks in the Dockerfile and docker-compose.yml.
+- Use specific version tags for images instead of 'latest' to ensure consistency.
 
 ## Security Considerations
 
