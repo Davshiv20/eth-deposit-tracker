@@ -25,7 +25,7 @@ The application uses:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/eth-deposit-tracker.git
+   git clone [https://github.com/Davshiv20/eth-deposit-tracker]
    cd eth-deposit-tracker
    ```
 
